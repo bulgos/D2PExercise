@@ -16,18 +16,15 @@
     </Window.Resources>
     <Border BorderThickness="10">
         <StackPanel>
-            <DockPanel HorizontalAlignment="Stretch">
-                <TextBlock Text="Date"/>
-                <TextBlock Text="Min"/>
-                <TextBlock Text="Max"/>
-                <TextBlock Text="Average"/>
-            </DockPanel>
-            <DockPanel>
-                <TextBox Text="{Binding WeatherDay.Date, StringFormat=dd.MM.yyyy}"></TextBox>
-                <TextBox Text="{Binding WeatherDay.LowTemp, Converter={StaticResource doubleConverter}, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                <TextBox Text="{Binding WeatherDay.HighTemp, Converter={StaticResource doubleConverter}, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                <TextBox Text="{Binding WeatherDay.AverageTemp, Mode=OneWay}"></TextBox>
-            </DockPanel>
+            <DataGrid
+                ItemsSource="{Binding WeatherCollection}"
+                AutoGenerateColumns="True"
+                GridLinesVisibility="All"
+                HorizontalGridLinesBrush="#FFDBDBDB" 
+                VerticalGridLinesBrush="#FFDBDBDB"
+                ColumnWidth="*"
+                >
+            </DataGrid>
 
         </StackPanel>
     </Border>
