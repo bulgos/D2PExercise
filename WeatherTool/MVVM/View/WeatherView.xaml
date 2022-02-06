@@ -6,8 +6,29 @@
         xmlns:local="clr-namespace:WeatherTool.MVVM.View"
         xmlns:vm="clr-namespace:WeatherTool.MVVM.ViewModel"
         mc:Ignorable="d"
-        Title="WeatherView" Height="500" Width="400">
-    <Grid>
-        
-    </Grid>
+        Title="Weather" Width="400"
+        SizeToContent="Height">
+    <Window.DataContext>
+        <vm:WeatherViewModel></vm:WeatherViewModel>
+    </Window.DataContext>
+    <Window.Resources>
+        <local:DoubleConverter x:Key="doubleConverter"></local:DoubleConverter>
+    </Window.Resources>
+    <Border BorderThickness="10">
+        <StackPanel>
+            <DockPanel HorizontalAlignment="Stretch">
+                <TextBlock Text="Date"/>
+                <TextBlock Text="Min"/>
+                <TextBlock Text="Max"/>
+                <TextBlock Text="Average"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBox Text="{Binding WeatherDay.Date, StringFormat=dd.MM.yyyy}"></TextBox>
+                <TextBox Text="{Binding WeatherDay.LowTemp, Converter={StaticResource doubleConverter}, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox Text="{Binding WeatherDay.HighTemp, Converter={StaticResource doubleConverter}, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox Text="{Binding WeatherDay.AverageTemp, Mode=OneWay}"></TextBox>
+            </DockPanel>
+
+        </StackPanel>
+    </Border>
 </Window>
