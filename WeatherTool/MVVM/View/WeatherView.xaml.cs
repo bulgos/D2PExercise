@@ -14,14 +14,12 @@ using System.Windows.Shapes;
 
 namespace WeatherTool.MVVM.View
 {
-    /// <summary>
-    /// Interaction logic for WeatherView.xaml
-    /// </summary>
     public partial class WeatherView : Window
     {
         public WeatherView()
         {
             InitializeComponent();
         }
+
     }
 }

@@ -16,7 +16,26 @@
     </Window.Resources>
     <Border BorderThickness="10">
         <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Project Name"/>
+                <TextBox Grid.Column="1" Text="{Binding WeatherFile.Name}"/>
+            </Grid>
+            <Separator Height="10" Background="Transparent"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Project Location"/>
+                <TextBox Grid.Column="1" Text="{Binding WeatherFile.Location}"/>
+            </Grid>
+            <Separator Height="10" Background="Transparent"/>
             <DataGrid
+                x:Name="DataGrid1"
                 ItemsSource="{Binding WeatherCollection}"
                 AutoGenerateColumns="True"
                 GridLinesVisibility="All"
