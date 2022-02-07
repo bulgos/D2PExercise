@@ -1,5 +1,5 @@
 # Weather Tool
-A simple desktop tool for managing and viewing weather data.
+A simple WPF desktop tool for managing and viewing weather data.
 
 ## Prerequisites
 The weather tool is built on the latest version of .NET Core (6.0)
