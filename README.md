@@ -11,9 +11,10 @@ Restore all nuget packages in order to build successfully
 
 ## Build instructions
 
- 1. Open the D2PExercise.sln Solution File in Visual Studio.
- 2. Run the command from the visual studio terminal window `devenv D2PExercise.sln /Build "Release"`
- 3. Run `WeatherTool.exe` from `\D2pExercise\out\`
+ 1. Clone repository.
+ 2. Open the D2PExercise.sln Solution File in Visual Studio.
+ 3. Run the command from the visual studio terminal window `devenv D2PExercise.sln /Build "Release"`
+ 4. Run `WeatherTool.exe` from `\D2pExercise\out\`
 
 ## Authors
 Daniel Christev
