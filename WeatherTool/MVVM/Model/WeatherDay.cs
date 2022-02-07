@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -48,6 +49,7 @@ namespace WeatherTool.MVVM.Model
             }
         }
 
+        [JsonIgnore]
         public double AverageTemp => (LowTemp + HighTemp)/2;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -11,20 +12,18 @@ namespace WeatherTool.MVVM.ViewModel
 {
     public class WeatherViewModel : BindableBase
     {
-        private WeatherDay _weatherDay = new WeatherDay();
+        private WeatherFile _weatherFile = new WeatherFile(null);
         private ListCollectionView _weatherCollection;
         
-        
-
         public WeatherViewModel()
         {
-            BuildDefaultCollection();
+            Initalise();
         }
 
-        public WeatherDay WeatherDay
+        public WeatherFile WeatherFile
         {
-            get => _weatherDay;
-            set => _weatherDay = value;
+            get => _weatherFile;
+            set => SetProperty(ref _weatherFile, value);
         }
 
         public ListCollectionView WeatherCollection
@@ -33,20 +32,9 @@ namespace WeatherTool.MVVM.ViewModel
             set => SetProperty(ref _weatherCollection, value);
         }
 
-        private void BuildDefaultCollection()
+        private void Initalise()
         {
-            List<WeatherDay> weatherList = new List<WeatherDay>();
-
-            var dateToday = DateOnly.FromDateTime(DateTime.Now);
-
-            for (int i = 0; i < 7; i++)
-            {
-                var date = dateToday.AddDays(-i);
-                WeatherDay weatherDay = new WeatherDay(date, 10, 15);
-                weatherList.Add(weatherDay);
-            }
-
-            WeatherCollection = new ListCollectionView(weatherList);
+            WeatherCollection = new ListCollectionView(WeatherFile.WeatherDays);
         }
     }
 }
