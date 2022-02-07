@@ -92,7 +92,10 @@ namespace WeatherTool.MVVM.Model
 
             string json = File.ReadAllText(path);
 
-            return JsonConvert.DeserializeObject<WeatherFile>(json);
+            var weatherFile = JsonConvert.DeserializeObject<WeatherFile>(json);
+            weatherFile.Filepath = path;
+
+            return weatherFile;
         }
     }
 }
