@@ -12,4 +12,17 @@
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	</ItemGroup>
 
+	<PropertyGroup>
+		<BuildDirectory>$(SolutionDir)out\</BuildDirectory>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<BuildFiles Include="$(TargetDir)*.*"
+					Exclude="$(TargetDir)*.pdb"/>
+	</ItemGroup>
+
+	<Target Name="CustomAfterBuild" AfterTargets="Build">
+		<MakeDir Directories="$(BuildDirectory)" Condition="!Exists($(BuildDirectory))"/>
+		<Copy SourceFiles="@(BuildFiles)" DestinationFolder="$(BuildDirectory)"/>
+	</Target>
 </Project>
