@@ -25,7 +25,18 @@
                 ColumnWidth="*"
                 >
             </DataGrid>
-            
+
+            <Grid Grid.Row="3" VerticalAlignment="Bottom" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Content="Open" Command="{Binding OpenWeatherCmd, Mode=OneWay}"/>
+                <Button Grid.Column="1" Content="Save" Command="{Binding SaveWeatherCmd, Mode=OneWay}"/>
+                <Button Grid.Column="2" Content="Save As" Command="{Binding SaveAWeatherCmd, Mode=OneWay}"/>
+            </Grid>
         </StackPanel>
     </Border>
 </Window>
