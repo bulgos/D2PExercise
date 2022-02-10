@@ -37,12 +37,18 @@
             <DataGrid
                 x:Name="DataGrid1"
                 ItemsSource="{Binding WeatherCollection}"
-                AutoGenerateColumns="True"
+                AutoGenerateColumns="False"
                 GridLinesVisibility="All"
                 HorizontalGridLinesBrush="#FFDBDBDB" 
                 VerticalGridLinesBrush="#FFDBDBDB"
                 ColumnWidth="*"
                 >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"/>
+                    <DataGridTextColumn Header="Low Temp" Binding="{Binding LowTemp}"/>
+                    <DataGridTextColumn Header="High Temp" Binding="{Binding HighTemp}"/>
+                    <DataGridTextColumn Header="Average Temp" Binding="{Binding AverageTemp, Mode=OneWay}"/>
+                </DataGrid.Columns>
             </DataGrid>
 
             <Grid Grid.Row="3" VerticalAlignment="Bottom" Margin="10">
