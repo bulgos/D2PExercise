@@ -19,7 +19,18 @@ namespace WeatherTool.MVVM.View
         public WeatherView()
         {
             InitializeComponent();
+            DataGrid1.AutoGeneratingColumn += OnDataGridAutogeneratingColumn;
         }
 
+        private void OnDataGridAutogeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            var headerName = e.Column.Header as string;
+
+            if (headerName == "Date")
+            {
+                DataGridTextColumn dateColumn = e.Column as DataGridTextColumn;
+                dateColumn.Binding = new Binding(e.PropertyName) { StringFormat = "dd/MM/yyyy" };
+            }
+        }
     }
 }
