@@ -9,21 +9,21 @@ namespace WeatherTool.MVVM.Model
 {
     public class WeatherDay : BindableBase
     {
-        private DateOnly _date;
+        private DateTime _date;
         private double _lowTemp;
         private double _highTemp;
 
         public WeatherDay()
-            : this(DateOnly.FromDateTime(DateTime.Now), 5, 10) { }
+            : this(DateTime.Now, 5, 10) { }
 
-        public WeatherDay(DateOnly date, int lowTemp, int highTemp)
+        public WeatherDay(DateTime date, int lowTemp, int highTemp)
         {
             _date = date;
             _lowTemp = lowTemp;
             _highTemp = highTemp;
         }
 
-        public DateOnly Date
+        public DateTime Date
         {
             get => _date;
             set => SetProperty(ref _date, value);

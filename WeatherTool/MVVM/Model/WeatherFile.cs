@@ -60,7 +60,7 @@ namespace WeatherTool.MVVM.Model
 
         private void BuildDefault()
         {
-            var dateToday = DateOnly.FromDateTime(DateTime.Now);
+            var dateToday = DateTime.Now;
 
             for (int i = 0; i < 7; i++)
             {
