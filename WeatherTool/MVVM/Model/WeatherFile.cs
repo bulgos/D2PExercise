@@ -14,7 +14,7 @@ namespace WeatherTool.MVVM.Model
         private string _location = "Zurich";
         private string _name = "WeatherInfo";
         private ObservableCollection<WeatherDay> _weatherDays = new ObservableCollection<WeatherDay>();
-        private TemperatureType _temperatureUnit;
+        private TemperatureUnit _temperatureUnit;
 
         private WeatherFile() { }
 
@@ -60,7 +60,7 @@ namespace WeatherTool.MVVM.Model
             Serialize();
         }
 
-        public TemperatureType TemperatureUnit 
+        public TemperatureUnit TemperatureUnit 
         { 
             get => _temperatureUnit;
             set
@@ -77,11 +77,11 @@ namespace WeatherTool.MVVM.Model
             for (int i = 0; i < 7; i++)
             {
                 var date = dateToday.AddDays(-i);
-                WeatherDay weatherDay = new WeatherDay(date, 10, 15, TemperatureType.Celsius);
+                WeatherDay weatherDay = new WeatherDay(date, 10, 15, TemperatureUnit.Celsius);
                 WeatherDays.Add(weatherDay);
             }
 
-            TemperatureUnit = TemperatureType.Celsius;
+            TemperatureUnit = TemperatureUnit.Celsius;
         }
 
         public void Serialize(string path = null)
@@ -112,7 +112,7 @@ namespace WeatherTool.MVVM.Model
             return weatherFile;
         }
 
-        public void ConvertTemperature(TemperatureType temperatureType)
+        public void ConvertTemperature(TemperatureUnit temperatureType)
         {
             foreach (var weather in WeatherDays)
             {

@@ -14,9 +14,9 @@ namespace WeatherTool.MVVM.Model
         private Temperature _highTemp;
 
         public WeatherDay()
-            : this(DateTime.Now, 5, 10, TemperatureType.Celsius) { }
+            : this(DateTime.Now, 5, 10, TemperatureUnit.Celsius) { }
 
-        public WeatherDay(DateTime date, double lowTemp, double highTemp, TemperatureType temperatureType)
+        public WeatherDay(DateTime date, double lowTemp, double highTemp, TemperatureUnit temperatureType)
             : this (date, new Temperature(lowTemp, temperatureType), new Temperature(highTemp, temperatureType)) { }
 
         public WeatherDay(DateTime date, Temperature lowTemp, Temperature highTemp)
@@ -55,7 +55,7 @@ namespace WeatherTool.MVVM.Model
         [JsonIgnore]
         public Temperature AverageTemp => Temperature.ComputeAverageTemperature(LowTemp, HighTemp);
 
-        public void ConvertTemperature(TemperatureType temperatureType)
+        public void ConvertTemperature(TemperatureUnit temperatureType)
         {
             LowTemp.ConvertTemperature(temperatureType);
             HighTemp.ConvertTemperature(temperatureType);

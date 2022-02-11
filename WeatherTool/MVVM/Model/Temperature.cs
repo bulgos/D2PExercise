@@ -9,61 +9,61 @@ namespace WeatherTool.MVVM.Model
 {
     public class Temperature : BindableBase
     {
-        private double _temperatureReading;
-        private TemperatureType _temperatureType;
+        private double _reading;
+        private TemperatureUnit _unit;
 
         public Temperature(double tempInDegreesCelsius)
-            : this(tempInDegreesCelsius, TemperatureType.Celsius) { }
+            : this(tempInDegreesCelsius, TemperatureUnit.Celsius) { }
 
-        public Temperature(double temp, TemperatureType temperatureType)
+        public Temperature(double temp, TemperatureUnit temperatureType)
         {
-            TemperatureReading = temp;
-            TemperatureType = temperatureType;
+            Reading = temp;
+            Unit = temperatureType;
         }
 
-        public double TemperatureReading
+        public double Reading
         {
-            get => _temperatureReading;
-            set => SetProperty(ref _temperatureReading, value);
+            get => _reading;
+            set => SetProperty(ref _reading, value);
         }
 
-        public TemperatureType TemperatureType
+        public TemperatureUnit Unit
         {
-            get => _temperatureType;
-            private set => SetProperty(ref _temperatureType, value);
+            get => _unit;
+            private set => SetProperty(ref _unit, value);
         }
 
-        public void ConvertTemperature(TemperatureType newTemperatureType)
+        public void ConvertTemperature(TemperatureUnit newTemperatureType)
         {
 
             NormaliseTemperature();
 
             switch (newTemperatureType)
             {
-                case TemperatureType.Celsius:
+                case TemperatureUnit.Celsius:
                     break;
-                case TemperatureType.Fahrenheit:
-                    TemperatureReading = (TemperatureReading * 9 / 5) + 32;
+                case TemperatureUnit.Fahrenheit:
+                    Reading = (Reading * 9 / 5) + 32;
                     break;
-                case TemperatureType.Kelvin:
-                    TemperatureReading = TemperatureReading + 273.15;
+                case TemperatureUnit.Kelvin:
+                    Reading = Reading + 273.15;
                     break;
             }
 
-            TemperatureType = newTemperatureType;
+            Unit = newTemperatureType;
         }
 
         private void NormaliseTemperature()
         {
-            switch (TemperatureType)
+            switch (Unit)
             {
-                case TemperatureType.Celsius:
+                case TemperatureUnit.Celsius:
                     break;
-                case TemperatureType.Fahrenheit:
-                    TemperatureReading = (TemperatureReading - 32) * 5 / 9;
+                case TemperatureUnit.Fahrenheit:
+                    Reading = (Reading - 32) * 5 / 9;
                     break;
-                case TemperatureType.Kelvin:
-                    TemperatureReading = TemperatureReading - 273.15;
+                case TemperatureUnit.Kelvin:
+                    Reading = Reading - 273.15;
                     break;
             }
         }
@@ -78,18 +78,18 @@ namespace WeatherTool.MVVM.Model
             if (!double.TryParse(regexMatch.Groups[1].Value, out double temperatureValue))
                 throw new ArgumentException("Could not parse temperature value");
 
-            TemperatureType temperatureType;
+            TemperatureUnit temperatureType;
 
             switch (regexMatch.Groups[2].Value)
             {
                 case "C":
-                    temperatureType = TemperatureType.Celsius;
+                    temperatureType = TemperatureUnit.Celsius;
                     break;
                 case "F":
-                    temperatureType = TemperatureType.Fahrenheit;
+                    temperatureType = TemperatureUnit.Fahrenheit;
                     break;
                 case "K":
-                    temperatureType = TemperatureType.Kelvin;
+                    temperatureType = TemperatureUnit.Kelvin;
                     break;
                 default:
                     throw new ArgumentException("Temperature unit is invalid");
@@ -100,36 +100,36 @@ namespace WeatherTool.MVVM.Model
 
         public static Temperature ComputeAverageTemperature(Temperature temp1, Temperature temp2)
         {
-            if (temp1.TemperatureType != temp2.TemperatureType)
-                temp2.ConvertTemperature(temp1.TemperatureType);
+            if (temp1.Unit != temp2.Unit)
+                temp2.ConvertTemperature(temp1.Unit);
 
-            double averageTemp = (temp1.TemperatureReading + temp2.TemperatureReading) / 2;
+            double averageTemp = (temp1.Reading + temp2.Reading) / 2;
 
-            return new Temperature(averageTemp, temp1.TemperatureType);
+            return new Temperature(averageTemp, temp1.Unit);
         }
 
         public override string ToString()
         {
             string tempUnit = "°";
 
-            switch (TemperatureType)
+            switch (Unit)
             {
-                case TemperatureType.Celsius:
+                case TemperatureUnit.Celsius:
                     tempUnit += "C";
                     break;
-                case TemperatureType.Fahrenheit:
+                case TemperatureUnit.Fahrenheit:
                     tempUnit += "F";
                     break;
-                case TemperatureType.Kelvin:
+                case TemperatureUnit.Kelvin:
                     tempUnit += "K";
                     break;
             }
 
-            return $"{TemperatureReading}{tempUnit}";
+            return $"{Reading}{tempUnit}";
         }
     }
 
-    public enum TemperatureType
+    public enum TemperatureUnit
     {
         Celsius,
         Fahrenheit,
