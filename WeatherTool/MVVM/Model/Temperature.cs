@@ -128,11 +128,4 @@ namespace WeatherTool.MVVM.Model
             return $"{Reading}{tempUnit}";
         }
     }
-
-    public enum TemperatureUnit
-    {
-        Celsius,
-        Fahrenheit,
-        Kelvin
-    }
 }
