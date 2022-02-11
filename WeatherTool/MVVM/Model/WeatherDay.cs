@@ -54,5 +54,15 @@ namespace WeatherTool.MVVM.Model
 
         [JsonIgnore]
         public Temperature AverageTemp => Temperature.ComputeAverageTemperature(LowTemp, HighTemp);
+
+        public void ConvertTemperature(TemperatureType temperatureType)
+        {
+            LowTemp.TemperatureType = temperatureType;
+            HighTemp.TemperatureType = temperatureType;
+            
+            OnPropertyChanged(nameof(LowTemp));
+            OnPropertyChanged(nameof(HighTemp));
+            OnPropertyChanged(nameof(AverageTemp));
+        }
     }
 }

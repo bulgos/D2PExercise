@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WeatherTool.MVVM.View"
+        xmlns:model="clr-namespace:WeatherTool.MVVM.Model"
         xmlns:vm="clr-namespace:WeatherTool.MVVM.ViewModel"
         mc:Ignorable="d"
         Title="Weather" Width="400"
@@ -12,8 +13,9 @@
         <vm:WeatherViewModel></vm:WeatherViewModel>
     </Window.DataContext>
     <Window.Resources>
-        <local:DoubleConverter x:Key="doubleConverter"></local:DoubleConverter>
-        <local:TemperatureConverter x:Key="temperatureConverter"></local:TemperatureConverter>
+        <local:DoubleConverter x:Key="doubleConverter"/>
+        <local:TemperatureConverter x:Key="temperatureConverter"/>
+        <local:EnumToBooleanConverter x:Key="enumToBooleanConverter"/>
     </Window.Resources>
     <Border BorderThickness="10">
         <StackPanel>
@@ -35,8 +37,21 @@
                 <TextBox Grid.Column="1" Text="{Binding WeatherFile.Location}"/>
             </Grid>
             <Separator Height="10" Background="Transparent"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <RadioButton IsChecked="{Binding Path=WeatherFile.TemperatureUnit, Converter={StaticResource enumToBooleanConverter}, ConverterParameter={x:Static model:TemperatureType.Celsius}}"
+                                 GroupName="TemperatureUnits" Content="Celsius" FlowDirection="RightToLeft" />
+                    <Separator Width="20" Background="Transparent"/>
+                    <RadioButton IsChecked="{Binding Path=WeatherFile.TemperatureUnit, Converter={StaticResource enumToBooleanConverter}, ConverterParameter={x:Static model:TemperatureType.Fahrenheit}}"
+                                 GroupName="TemperatureUnits" Content="Fahrenheit" FlowDirection="RightToLeft"/>
+                </StackPanel>
+            </Grid>
+            <Separator Height="10" Background="Transparent"/>
             <DataGrid
-                x:Name="DataGrid1"
                 ItemsSource="{Binding WeatherCollection}"
                 AutoGenerateColumns="False"
                 GridLinesVisibility="All"

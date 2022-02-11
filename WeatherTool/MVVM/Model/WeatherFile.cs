@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,8 @@ namespace WeatherTool.MVVM.Model
     {
         private string _location = "Zurich";
         private string _name = "WeatherInfo";
-        private List<WeatherDay> _weatherDays = new List<WeatherDay>();
+        private ObservableCollection<WeatherDay> _weatherDays = new ObservableCollection<WeatherDay>();
+        private TemperatureType _temperatureUnit;
 
         private WeatherFile() { }
 
@@ -47,7 +49,7 @@ namespace WeatherTool.MVVM.Model
             set => SetProperty(ref _name, value);
         }
 
-        public List<WeatherDay> WeatherDays
+        public ObservableCollection<WeatherDay> WeatherDays
         {
             get => _weatherDays;
             set => SetProperty(ref _weatherDays, value);
@@ -56,6 +58,16 @@ namespace WeatherTool.MVVM.Model
         {
             BuildDefault();
             Serialize();
+        }
+
+        public TemperatureType TemperatureUnit 
+        { 
+            get => _temperatureUnit;
+            set
+            {
+                ConvertTemperature(value);
+                SetProperty(ref _temperatureUnit, value);
+            }
         }
 
         private void BuildDefault()
@@ -68,6 +80,8 @@ namespace WeatherTool.MVVM.Model
                 WeatherDay weatherDay = new WeatherDay(date, 10, 15, TemperatureType.Celsius);
                 WeatherDays.Add(weatherDay);
             }
+
+            TemperatureUnit = TemperatureType.Celsius;
         }
 
         public void Serialize(string path = null)
@@ -96,6 +110,14 @@ namespace WeatherTool.MVVM.Model
             weatherFile.Filepath = path;
 
             return weatherFile;
+        }
+
+        public void ConvertTemperature(TemperatureType temperatureType)
+        {
+            foreach (var weather in WeatherDays)
+            {
+                weather.ConvertTemperature(temperatureType);
+            }
         }
     }
 }
