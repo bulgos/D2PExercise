@@ -30,14 +30,10 @@ namespace WeatherTool.MVVM.Model
         public TemperatureType TemperatureType
         {
             get => _temperatureType;
-            set
-            {
-                ConvertTemperature(value);
-                SetProperty(ref _temperatureType, value);
-            }
+            private set => SetProperty(ref _temperatureType, value);
         }
 
-        private void ConvertTemperature(TemperatureType newTemperatureType)
+        public void ConvertTemperature(TemperatureType newTemperatureType)
         {
 
             NormaliseTemperature();
@@ -53,6 +49,8 @@ namespace WeatherTool.MVVM.Model
                     TemperatureReading = TemperatureReading + 273.15;
                     break;
             }
+
+            TemperatureType = newTemperatureType;
         }
 
         private void NormaliseTemperature()
@@ -105,7 +103,9 @@ namespace WeatherTool.MVVM.Model
             if (temp1.TemperatureType != temp2.TemperatureType)
                 temp2.ConvertTemperature(temp1.TemperatureType);
 
-            return new Temperature((temp1.TemperatureReading + temp2.TemperatureReading) / 2, temp1.TemperatureType);
+            double averageTemp = (temp1.TemperatureReading + temp2.TemperatureReading) / 2;
+
+            return new Temperature(averageTemp, temp1.TemperatureType);
         }
 
         public override string ToString()

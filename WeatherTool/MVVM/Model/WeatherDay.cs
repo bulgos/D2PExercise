@@ -57,8 +57,8 @@ namespace WeatherTool.MVVM.Model
 
         public void ConvertTemperature(TemperatureType temperatureType)
         {
-            LowTemp.TemperatureType = temperatureType;
-            HighTemp.TemperatureType = temperatureType;
+            LowTemp.ConvertTemperature(temperatureType);
+            HighTemp.ConvertTemperature(temperatureType);
             
             OnPropertyChanged(nameof(LowTemp));
             OnPropertyChanged(nameof(HighTemp));
