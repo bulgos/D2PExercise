@@ -48,6 +48,9 @@
                     <Separator Width="20" Background="Transparent"/>
                     <RadioButton IsChecked="{Binding Path=WeatherFile.TemperatureUnit, Converter={StaticResource enumToBooleanConverter}, ConverterParameter={x:Static model:TemperatureType.Fahrenheit}}"
                                  GroupName="TemperatureUnits" Content="Fahrenheit" FlowDirection="RightToLeft"/>
+                    <Separator Width="20" Background="Transparent"/>
+                    <RadioButton IsChecked="{Binding Path=WeatherFile.TemperatureUnit, Converter={StaticResource enumToBooleanConverter}, ConverterParameter={x:Static model:TemperatureType.Kelvin}}"
+                                 GroupName="TemperatureUnits" Content="Kelvin" FlowDirection="RightToLeft"/>
                 </StackPanel>
             </Grid>
             <Separator Height="10" Background="Transparent"/>
