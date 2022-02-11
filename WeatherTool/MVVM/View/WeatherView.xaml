@@ -13,6 +13,7 @@
     </Window.DataContext>
     <Window.Resources>
         <local:DoubleConverter x:Key="doubleConverter"></local:DoubleConverter>
+        <local:TemperatureConverter x:Key="temperatureConverter"></local:TemperatureConverter>
     </Window.Resources>
     <Border BorderThickness="10">
         <StackPanel>
@@ -45,9 +46,9 @@
                 >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"/>
-                    <DataGridTextColumn Header="Low Temp" Binding="{Binding LowTemp}"/>
-                    <DataGridTextColumn Header="High Temp" Binding="{Binding HighTemp}"/>
-                    <DataGridTextColumn Header="Average Temp" Binding="{Binding AverageTemp, Mode=OneWay}"/>
+                    <DataGridTextColumn Header="Low Temp" Binding="{Binding LowTemp, Converter={StaticResource temperatureConverter}}"/>
+                    <DataGridTextColumn Header="High Temp" Binding="{Binding HighTemp, Converter={StaticResource temperatureConverter}}"/>
+                    <DataGridTextColumn Header="Average Temp" Binding="{Binding AverageTemp, Converter={StaticResource temperatureConverter}, Mode=OneWay}"/>
                 </DataGrid.Columns>
             </DataGrid>
 

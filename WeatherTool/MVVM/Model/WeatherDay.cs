@@ -10,13 +10,16 @@ namespace WeatherTool.MVVM.Model
     public class WeatherDay : BindableBase
     {
         private DateTime _date;
-        private double _lowTemp;
-        private double _highTemp;
+        private Temperature _lowTemp;
+        private Temperature _highTemp;
 
         public WeatherDay()
-            : this(DateTime.Now, 5, 10) { }
+            : this(DateTime.Now, 5, 10, TemperatureType.Celsius) { }
 
-        public WeatherDay(DateTime date, int lowTemp, int highTemp)
+        public WeatherDay(DateTime date, double lowTemp, double highTemp, TemperatureType temperatureType)
+            : this (date, new Temperature(lowTemp, temperatureType), new Temperature(highTemp, temperatureType)) { }
+
+        public WeatherDay(DateTime date, Temperature lowTemp, Temperature highTemp)
         {
             _date = date;
             _lowTemp = lowTemp;
@@ -29,7 +32,7 @@ namespace WeatherTool.MVVM.Model
             set => SetProperty(ref _date, value);
         }
 
-        public double LowTemp
+        public Temperature LowTemp
         {
             get => _lowTemp;
             set
@@ -39,7 +42,7 @@ namespace WeatherTool.MVVM.Model
             }
         }
 
-        public double HighTemp 
+        public Temperature HighTemp 
         { 
             get => _highTemp;
             set
@@ -50,6 +53,6 @@ namespace WeatherTool.MVVM.Model
         }
 
         [JsonIgnore]
-        public double AverageTemp => (LowTemp + HighTemp)/2;
+        public Temperature AverageTemp => Temperature.ComputeAverageTemperature(LowTemp, HighTemp);
     }
 }

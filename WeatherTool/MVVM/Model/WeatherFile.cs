@@ -65,7 +65,7 @@ namespace WeatherTool.MVVM.Model
             for (int i = 0; i < 7; i++)
             {
                 var date = dateToday.AddDays(-i);
-                WeatherDay weatherDay = new WeatherDay(date, 10, 15);
+                WeatherDay weatherDay = new WeatherDay(date, 10, 15, TemperatureType.Celsius);
                 WeatherDays.Add(weatherDay);
             }
         }
