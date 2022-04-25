@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace WeatherTool.MVVM.View
+namespace WeatherTool.MVVM.Converter
 {
     public class EnumToBooleanConverter : IValueConverter
     {

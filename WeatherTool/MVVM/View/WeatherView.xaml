@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WeatherTool.MVVM.View"
+        xmlns:cv="clr-namespace:WeatherTool.MVVM.Converter"
         xmlns:model="clr-namespace:WeatherTool.MVVM.Model"
         xmlns:vm="clr-namespace:WeatherTool.MVVM.ViewModel"
         mc:Ignorable="d"
@@ -13,9 +14,9 @@
         <vm:WeatherViewModel></vm:WeatherViewModel>
     </Window.DataContext>
     <Window.Resources>
-        <local:DoubleConverter x:Key="doubleConverter"/>
-        <local:TemperatureConverter x:Key="temperatureConverter"/>
-        <local:EnumToBooleanConverter x:Key="enumToBooleanConverter"/>
+        <cv:DoubleConverter x:Key="doubleConverter"/>
+        <cv:TemperatureConverter x:Key="temperatureConverter"/>
+        <cv:EnumToBooleanConverter x:Key="enumToBooleanConverter"/>
     </Window.Resources>
     <Border BorderThickness="10">
         <StackPanel>

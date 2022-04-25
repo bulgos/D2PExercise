@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using WeatherTool.MVVM.Model;
 
-namespace WeatherTool.MVVM.View
+namespace WeatherTool.MVVM.Converter
 {
     [ValueConversion(typeof(Temperature), typeof(string))]
     public class TemperatureConverter : IValueConverter
